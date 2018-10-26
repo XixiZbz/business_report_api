@@ -1,0 +1,15 @@
+body {
+	width: 600px;
+	height: 400px;
+}
+
+
+
+#posting-num{
+	text-align: center;
+}
+#posting-percentage{
+	text-align: center;
+	display: inline;
+
+}
