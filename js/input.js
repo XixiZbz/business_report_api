@@ -26,22 +26,7 @@ $("#test").click(function(){
 
 	)
 
-// $("button").click(function(){
-// // 	chrome.runtime.sendMessage({
-// // 	  datetime: data_time
-// // 	  console.log('get button')
-// // }, function(response))
-// 	chrome.runtime.sendMessage(
-// 		{datatime: date_time},
-// 		function(response){
-// 			console.log('get button');
-// 		})
-// });
 
-// chrome.runtime.sendMessage({
-// 	  method: 'showAlert',
-// 	  datetime: this.value
-// }, function(response) {});
 chrome.runtime.getBackgroundPage(function(message,sender,sendRseponse){
 	console.log(message.data)
 })

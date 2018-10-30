@@ -29,6 +29,8 @@ viewDateUnits+
 runDate+
 nowTime
 
+var re = /(\w+):\/\/([^\:|\/]+)(\:\d*)?(.*\/)([^#|\?|\n]+)?(#.*)?(\?.*)?/i
+
 
 function date_form(date){
 	form_date_list = date.split('-')
@@ -50,7 +52,13 @@ function date_form(date){
 	else{
 		day = day.toString()
 	}
-	form_date = month+"%2F"+day+"%2F"+year
+	if(pre_url=='https://sellercentral.amazon.com/' || pre_url=='https://sellercentral-japan.amazon.com/' || pre_url=='https://sellercentral.amazon.ca/')
+	{
+		form_date = month+"%2F"+day+"%2F"+year
+	}
+	else if (pre_url=='https://sellercentral.amazon.de/' || pre_url=='https://sellercentral.amazon.co.uk/' || pre_url=='https://sellercentral.amazon.fr/' || pre_url=='https://sellercentral.amazon.it/' || pre_url=='https://sellercentral.amazon.com.au/'){
+		form_date = day+"%2F"+month+"%2F"+year
+	}
 	return form_date
 }
 
@@ -124,6 +132,7 @@ function pushToDb(message){
 
 function fuckData(info,seller_id,r_date){
 	var data = new Object()
+	data['site_url'] = info[0].match(re)[2]
 	if(info.length==17){
 		parent_asin = info[0].match(">(.*)</a>")[1]
 		data['parent_asin'] = parent_asin
@@ -250,6 +259,7 @@ function postData(endFormDate,beginDate){
 	})
 }
 chrome.runtime.onMessage.addListener(function(message,sender,sendRseponse){
+
 	dateArrays = dateForm(message)
 	beginFormDate = dateArrays[0]
 	endFormDate = dateArrays[1]
