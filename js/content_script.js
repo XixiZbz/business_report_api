@@ -29,8 +29,10 @@ viewDateUnits+
 runDate+
 nowTime
 
-var re = /(\w+):\/\/([^\:|\/]+)(\:\d*)?(.*\/)([^#|\?|\n]+)?(#.*)?(\?.*)?/i
 
+language = $("option[selected='selected']")[0].text
+
+var re = /(\w+):\/\/([^\:|\/]+)(\:\d*)?(.*\/)([^#|\?|\n]+)?(#.*)?(\?.*)?/i
 
 function date_form(date){
 	form_date_list = date.split('-')
@@ -39,6 +41,7 @@ function date_form(date){
 	dayString = form_date_list[2]
 	month = parseInt(monthString)
 	day = parseInt(dayString)
+	console.log(language)
 	if(month<10){
 		month = "0"+month.toString()
 	}
@@ -52,12 +55,20 @@ function date_form(date){
 	else{
 		day = day.toString()
 	}
-	if(pre_url=='https://sellercentral.amazon.com/' || pre_url=='https://sellercentral-japan.amazon.com/' || pre_url=='https://sellercentral.amazon.ca/')
-	{
-		form_date = month+"%2F"+day+"%2F"+year
+	if(language=="English"){
+		console.log('it is english')
+		if(pre_url=='https://sellercentral.amazon.com/' || pre_url=='https://sellercentral-japan.amazon.com/' || pre_url=='https://sellercentral.amazon.ca/')
+		{
+			form_date = month+"%2F"+day+"%2F"+year
+		}
+		else if (pre_url=='https://sellercentral.amazon.de/' || pre_url=='https://sellercentral.amazon.co.uk/' || pre_url=='https://sellercentral.amazon.fr/' || pre_url=='https://sellercentral.amazon.it/' || pre_url=='https://sellercentral.amazon.com.au/'){
+			form_date = day+"%2F"+month+"%2F"+year
+		}
 	}
-	else if (pre_url=='https://sellercentral.amazon.de/' || pre_url=='https://sellercentral.amazon.co.uk/' || pre_url=='https://sellercentral.amazon.fr/' || pre_url=='https://sellercentral.amazon.it/' || pre_url=='https://sellercentral.amazon.com.au/'){
-		form_date = day+"%2F"+month+"%2F"+year
+	else if(language=='中文'){
+		console.log('it is chinese')
+		form_date = year+"-"+month+"-"+day
+		console.log(form_date)
 	}
 	return form_date
 }
@@ -160,9 +171,9 @@ function fuckData(info,seller_id,r_date){
 		data["unit_session_percentage"]=unit_session_percentage
 		unit_session_percentage_b2b = info[12].match("<nobr>(.*)%</nobr>")[1]
 		data["unit_session_percentage_b2b"]=unit_session_percentage_b2b
-		ordered_product_sales = info[13].match(/.?(\d*,?\d*)/)[1]
+		ordered_product_sales = info[13].match(/\w*.?([\d|,|\.]*)/)[1]
 		data["ordered_product_sales"]=ordered_product_sales
-		ordered_product_sales_b2b = info[14].match(/.?(\d*,?\d*)/)[1]
+		ordered_product_sales_b2b = info[14].match(/\w*.?([\d|,|\.]*)/)[1]
 		data["ordered_product_sales_b2b"]=ordered_product_sales_b2b
 		total_order_items = info[15]
 		data["total_order_items"]=total_order_items
@@ -198,7 +209,7 @@ function fuckData(info,seller_id,r_date){
 		data["unit_session_percentage"]=unit_session_percentage
 		unit_session_percentage_b2b = "0"
 		data["unit_session_percentage_b2b"]=unit_session_percentage_b2b
-		ordered_product_sales = info[11].match(/.?(\d*,?\d*)/)[1]
+		ordered_product_sales = info[11].match(/\w*.?([\d|,|\.]*)/)[1]
 		data["ordered_product_sales"]=ordered_product_sales
 		ordered_product_sales_b2b = "0"
 		data["ordered_product_sales_b2b"]=ordered_product_sales_b2b
