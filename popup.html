@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="theme/peak/css/common/ui/Loading.css">
 	<link rel="stylesheet" href="theme/peak/css/common/animate.css">
 	<link rel="stylesheet" href="theme/peak/css/common/color.css">
+	<link rel="stylesheet" href="theme/peak/css/common/ui/Select.css">
+
+
 </head>
 
 
@@ -22,33 +25,46 @@
 	</div>
 	<div class="ui-tab-contents">
 	    <article id="tabTarget1" class="ui-tab-content checked" role="tabpanel">
-	    	<p>选择日期范围：
-			 	<span class="ui-input ui-date-range-input">
-			 		<input type="date-range" min="2016-01-01" max="2029-04-01">
-			 	</span>
-	 		</p>
-	 		<div style="text-align:center;">
-	 			<button href="javascript:" class="ui-button ui-button-primary" role="button">提交
-	 		</div>
+	    	<div class="tab-container-first">
+	    		<div class="date-range-contain">
+		    		<div class="label-select">选择日期范围：</div>
+				 	<span class="ui-input ui-date-range-input">
+				 		<input type="date-range" min="2016-01-01" max="2029-04-01">
+				 	</span>
+		 		</div>
+		 		<div>
+		 			<div class="label-select">报告类型：</div>
+			 	 	<select class="select">
+					    <option>Business Reports</option>
+					</select>
+				</div>
+		    </div>
+	    	<div class="submit-btn">
+		 			<button href="javascript:" class="ui-button ui-button-primary" role="button">提交</button>
+		 		</div>
 	    </article>
 	    <article id="tabTarget2" class="ui-tab-content" role="tabpanel">
-	    	<div class="ui-loading" style="height:100px;"><span class="ui-loading-icon"></span>
-	    	</div>
-	    	<div clas='posting-status'>
-		    	<div id='posting-num' class='dark'>
-		    		0%
+	    	<div class="tab-container">
+	    		<div class='progress-main'>
+	    			<div class="progress-top">
+	    				<div class="left">Business Report</div>
+	    				<div class="right">0%</div>
+	    			</div>
+		    		<progress id='progress' value="0" max="100"></progress>
 		    	</div>
-
-	    	</div>
-	 
+	    	</div>	
+	    	
 	    </article>
 	</div>
 	<script src="theme/peak/js/plugin/jquery.js"></script>
 	<script src="theme/peak/js/common/ui/Follow.js"></script>
 	<script src="theme/peak/js/common/ui/DateTime.js"></script>
 	<script src='js/input.js'></script>
-	<script src="js/popup.js"></script>
 	
+	<script src="theme/peak/js/common/ui/Select.js"></script>
+	<script src="js/popup.js"></script>
+	<!-- <script src="//qidian.gtimg.com/lulu/theme/peak/js/common/ui/Select.js"></script> -->
+
 	<script src="theme/peak/js/common/ui/Tab.js"></script>
 	<script src="js/tab.js"></script>
 	<script src="theme/peak/js/common/ui/Loading.js"></script>

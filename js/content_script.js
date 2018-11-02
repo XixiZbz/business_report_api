@@ -102,7 +102,7 @@ function dateDiffIncludeToday(startDateString, endDateString){
     	return parseInt(Math.abs(endDate - startDate ) / 1000 / 60 / 60 /24) + 1;
     	}//把相差的毫秒数转换为天数
     else{
-    	return -1
+    	return 0
     }
 
 };  
@@ -245,7 +245,7 @@ function postData(endFormDate,beginDate){
 	    type: "get",
 	    url: request_url,
 	    timeout: 5000,
-	    async: true,
+	    async: false,
 	    success: function(data) {
 	    	dataJson = strToJson(data)
 	    	rows = dataJson.data.rows;
@@ -268,10 +268,16 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendRseponse){
 	console.log(beginFormDate,endFormDate)
 	todayDate = getToday()
 	dateDiff = dateDiffIncludeToday(endDate, todayDate)
+	allDay = dateDiffIncludeToday(beginDate, endDate)
 	if (dateDiff>=0){
 		while(dateDiff>0){
 			console.log(dateDiff,beginDate,endDate)
 			dateDiff = dateDiffIncludeToday(beginDate, endDate)
+			console.log("allday",allDay,"dateDiff",dateDiff)
+			percent = (allDay-dateDiff)/allDay
+			chrome.runtime.sendMessage({percent:percent}, function(response) {
+  					console.log('retrun hello');
+			});
 			postData(beginFormDate,beginDate)
 			beginDate = dateAddOne(beginDate)
 			beginFormDate = date_form(beginDate)

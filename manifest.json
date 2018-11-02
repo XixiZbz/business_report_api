@@ -27,7 +27,8 @@
     {
         // 2种指定方式，如果指定JS，那么会自动生成一个背景页
         //"page": "background.html"
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": true
         // "per":true
     },
     // 浏览器右上角图标设置，browser_action、page_action、app必须三选一

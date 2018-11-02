@@ -1,15 +1,62 @@
 body {
-	width: 600px;
-	height: 400px;
+	width: 496px;
+	height: 434px;
+	margin: 0;
 }
 
-
+#tabView{
+	padding: 0 20px;
+}
+.label-select{
+	margin-bottom: 10px;
+}
+.tab-container-first{
+	padding: 0 20px;
+}
+.tab-container-first >div{
+	width: 77.2%;
+	margin-bottom: 20px;
+}
+.submit-btn{
+	width: 100%;
+	height: 48px;
+	padding: 0 20px;
+	box-sizing: border-box;
+	background-color: #fafafa;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.select{
+	width: 238px;
+}
+.date-range-contain{
+	margin-bottom: 20px;
+}
 
 #posting-num{
 	text-align: center;
 }
-#posting-percentage{
-	text-align: center;
-	display: inline;
 
+#tabTarget2{
+	height: 410px;
+}
+.tab-container{
+	padding-top: 140px;
+	display: flex;
+	justify-content: center;
+}
+
+.tab-container .progress-main{
+	width: 80%;
+}
+.tab-container .progress-main .progress-top{
+	display: flex;
+	justify-content: space-between;
+}
+.tab-container .progress-main #progress{
+	width: 100%;
 }

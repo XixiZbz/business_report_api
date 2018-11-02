@@ -1,7 +1,17 @@
 $('input').each(function (global, factory) {
 	var type = $(this).attr('type');
 	if (/^date|year|month|time|hour|minute/.test(type)) {
-	    new DateTime($(this));
+	    new DateTime($(this),{
+	    	onShow:function(){
+	    		console.log('log')
+	    		// $("body").css({"width":"580","height":"450"})
+	    	},
+	    	onHide:function(){
+	    		console.log('das')
+	    		// $("body").css({"width":"500","height":"400"})
+	    	}
+	    })
+	  
 	}
 });
 $("input").change(function() {
@@ -15,18 +25,17 @@ $("input").change(function() {
 		})
 });
 });
-var count = 0
-$("#test").click(function(){
-		console.log("数字加1",count);
-		innerHTML = String(count)+"%"
-		document.getElementById("posting-num").innerHTML=innerHTML
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+	if(message.percent!=undefined){
+			console.log("percent",message.percent.toFixed(2)*100)
+			var percent = message.percent.toFixed(2)*100
+			$('progress').attr({'value':percent})
+			$('#tabTarget2 .progress-main .progress-top .right').text(percent+"%")
 	}
+  	
+});
 
 
 
-	)
 
 
-chrome.runtime.getBackgroundPage(function(message,sender,sendRseponse){
-	console.log(message.data)
-})
